@@ -1,13 +1,12 @@
+/*
+I got rid of the extraneous code so I focus on just the first block
+*/
+
 // functions to attach events to buttons
 addShowCAFieldsEvent();
-addShowCLFieldsEvent();
-addShowIPEFieldsEvent();
-addShowLTLFieldsEvent();
-addShowIntFieldsEvent();
-addCalcTotalEvent();
 
 // declare global variable for total current assets
-var TCA;
+
 
 // set event to show the current asset label and input "fields" 
 function addShowCAFieldsEvent() {
@@ -16,63 +15,68 @@ function addShowCAFieldsEvent() {
 // function to show current asset fields and calculate total assets (TCA)
 function showCAFields() {
     // declare local variables
-    var iCash = 0, iInventory = 0, iSupplies = 0, iTempInv = 0, TCA = 0; 
-    const lineBreak = document.createElement("br");
+    /* The problem here is use var to declare. You should use let or const (in this case let). 
+    Notice you are declare iCash,etc as a number, then switching it to an element.
+
+    */
+    //var iCash = 0, iInventory = 0, iSupplies = 0, iTempInv = 0, TCA = 0; <-- moved to global.
+ 
+    const lineBreak = document.createElement("br");  //you don't need to do a line break if you use an element with a line break.
     // declare new node paragrah for displaying the fields
-    var node = document.createElement("P");
+    let node = document.createElement("P");
     
-    var cash = document.createTextNode("Cash:  ");
+    //
+    let tCash = document.createTextNode("Cash:  ");
     // cash input variable with event listener
     var iCash = document.createElement("input");
     iCash.setAttribute("type", "number");
+    iCash.setAttribute("id", "cash")
+    
+    //you don't need an event listener here and need to use an arrow function if you did
+    //it this point you are showing the input box, but there is nothing in it. So
+    //setting the data doesn't work here.
+    
+    /*
     iCash.addEventListener("input", calcTotal());
     // function to add the input cash to TCA
 
         function calcTotal() {
             TCA += iCash;
         }
+        */
 
     // similar variables and functions for the other current assets
-    var inventory = document.createTextNode("Inventory:  ");
-    var iInventory = document.createElement("input");
+    let tInventory = document.createTextNode("Inventory:  ");
+    let iInventory = document.createElement("input");
     iInventory.setAttribute("type", "number");
-    iInventory.addEventListener("input", calcTotal());
-    
-        function calcTotal() {
-            TCA += iInventory;
-        }
-
-    var supplies = document.createTextNode("Supplies:  ");
-    var iSupplies = document.createElement("input");
+    iInventory.setAttribute("id", "inventory");
+   
+    let tSupplies = document.createTextNode("Supplies:  ");
+    let iSupplies = document.createElement("input");
     iSupplies.setAttribute("type", "number");
-    iSupplies.addEventListener("input", calcTotal());
+    iSupplies.setAttribute("id", "supplies");
     
-        function calcTotal() {
-            TCA += iSupplies;
-        }
-    
-    var tempInv = document.createTextNode("Temporary Investments: ");
-    var iTempInv = document.createElement("input");
+    let tTempInv = document.createTextNode("Temporary Investments: ");
+    let iTempInv = document.createElement("input");
     iTempInv.setAttribute("type", "number");
-    iTempInv.addEventListener("input", calcTotal());
-    
-        function calcTotal() {
-            TCA += iTempInv;
-        }
-
-    var totCurrentAssets = document.createTextNode("Total Current Assets: "); 
+    iTempInv.setAttribute("id", "tempinv");
+ 
+    //let totCurrentAssets = document.createTextNode("Total Current Assets: "); 
+    let totCurrentAssets = document.createElement("span");
+    totCurrentAssets.setAttribute("id", "total-current-assets")
+    totCurrentAssets.innerHTML = "Total Current Assets: ";
 
     // appending the current assets nodes for display
-    node.appendChild(cash);
+    node.appendChild(tCash);
     node.appendChild(iCash);
     node.appendChild(lineBreak.cloneNode(true));
-    node.appendChild(inventory);
+    node.appendChild(tInventory);
     node.appendChild(iInventory);
     node.appendChild(lineBreak.cloneNode(true));
-    node.appendChild(supplies);
+    node.appendChild(tSupplies);
     node.appendChild(iSupplies);
     node.appendChild(lineBreak.cloneNode(true));
-    node.appendChild(tempInv);
+    node.appendChild(tTempInv);
     node.appendChild(iTempInv);
     node.appendChild(lineBreak.cloneNode(true));
     node.appendChild(totCurrentAssets);
@@ -81,172 +85,23 @@ function showCAFields() {
     // configuring the current asset button so that it won't display the current asset fields again
     document.getElementById("buttonCAF").style.display = "none";
 
-    // returning TCA for use in calculating total position
-    return (TCA);
-}
-
-// similar code for the other (besides current assets) sections of balance sheet 
-function addShowCLFieldsEvent() {
-    buttonCLF.addEventListener('click', showCLFields);
-}
-
-function showCLFields() {
-    const lineBreak = document.createElement("br");
-    var node = document.createElement("P");
     
-    var acctsPay = document.createTextNode("Accounts Payable:  ");
-    var iAcctsPay = document.createElement("input");
-    iAcctsPay.setAttribute("type", "number");
-
-    var notesPay = document.createTextNode("Notes Payable:  ");
-    var iNotesPay = document.createElement("input");
-    iNotesPay.setAttribute("type", "number");
-
-    var intPay = document.createTextNode("Interest Payable:  ");
-    var iIntPay = document.createElement("input");
-    iIntPay.setAttribute("type", "number");
- 
-    var wagesPay = document.createTextNode("Wages Payable: ");
-    var iWagesPay = document.createElement("input");
-    iWagesPay.setAttribute("type", "number");
-
-    var accruedExp = document.createTextNode("Accrued Expenses: ");
-    var iAccruedExp = document.createElement("input");
-    iAccruedExp.setAttribute("type", "number");
-
-    var totCurrentLiabilities = document.createTextNode("Total Current Liabilities: "); 
-
-    node.appendChild(acctsPay);
-    node.appendChild(iAcctsPay);
-    node.appendChild(lineBreak.cloneNode(true));
-    node.appendChild(notesPay);
-    node.appendChild(iNotesPay);
-    node.appendChild(lineBreak.cloneNode(true));
-    node.appendChild(intPay);
-    node.appendChild(iIntPay);
-    node.appendChild(lineBreak.cloneNode(true));
-    node.appendChild(wagesPay);
-    node.appendChild(iWagesPay);
-    node.appendChild(lineBreak.cloneNode(true));
-    node.appendChild(accruedExp);
-    node.appendChild(iAccruedExp);
-    node.appendChild(lineBreak.cloneNode(true));
-    node.appendChild(totCurrentLiabilities);
-    document.getElementById("liabilitiesCurrent").appendChild(node);
-
-    document.getElementById("buttonCLF").style.display = "none";
+    // returning TCA for use in calculating total position 
+    //return (TCA) <-- you don't need to return this.
 }
 
-function addShowIPEFieldsEvent() {
-    buttonIPEF.addEventListener('click', showIPEFields);
-}
-
-function showIPEFields() {
-    const lineBreak = document.createElement("br");
-    var node = document.createElement("P");
+function calculatePosition() {           
+    let cash = parseFloat(document.getElementById("cash").value);
+    let inventory = parseFloat(document.getElementById("inventory").value);
+    let supplies = parseFloat(document.getElementById("supplies").value);
+    let tempInv = parseFloat(document.getElementById("tempinv").value);
+    let TCA = cash + inventory + supplies + tempInv;
+    let totCurrentAssets = document.getElementById("total-current-assets");
+    totCurrentAssets.innerHTML = "Total Current Assets: " + TCA;
+    console.log(TCA);
     
-    var land = document.createTextNode("Land:  ");
-    var iLand = document.createElement("input");
-    iLand.setAttribute("type", "number");
-
-    var bldg = document.createTextNode("Building and Improvements:  ");
-    var iBldg = document.createElement("input");
-    iBldg.setAttribute("type", "number");
-
-    var equip = document.createTextNode("Equipment:  ");
-    var iEquip = document.createElement("input");
-    iEquip.setAttribute("type", "number");
- 
-    var tempInv2 = document.createTextNode("Temporary Investments: ");
-    var iTempInv2 = document.createElement("input");
-    iTempInv2.setAttribute("type", "number");
-
-    var totInvPropEquip = document.createTextNode("Total Investment Property and Equipment: "); 
-
-    node.appendChild(land);
-    node.appendChild(iLand);
-    node.appendChild(lineBreak.cloneNode(true));
-    node.appendChild(bldg);
-    node.appendChild(iBldg);
-    node.appendChild(lineBreak.cloneNode(true));
-    node.appendChild(equip);
-    node.appendChild(iEquip);
-    node.appendChild(lineBreak.cloneNode(true));
-    node.appendChild(tempInv2);
-    node.appendChild(iTempInv2);
-    node.appendChild(lineBreak.cloneNode(true));
-    node.appendChild(totInvPropEquip);
-    document.getElementById("investments").appendChild(node);
-
-    document.getElementById("buttonIPEF").style.display = "none";
+    //let textTCA = TCA;
+    //var node = document.createTextNode(TCA);
+    //document.getElementById("showTCA").appendChild(node);
 }
 
-function addShowLTLFieldsEvent() {
-    buttonLTLF.addEventListener('click', showLTLFields);
-}
-
-function showLTLFields() {
-    const lineBreak = document.createElement("br");
-    var node = document.createElement("P");
-    
-    var notesPay = document.createTextNode("Notes Payable:  ");
-    var iNotesPay = document.createElement("input");
-    iNotesPay.setAttribute("type", "number");
-
-    var bondsPay = document.createTextNode("Bonds Payable:  ");
-    var iBondsPay = document.createElement("input");
-    iBondsPay.setAttribute("type", "number");
-
-    var totLongTermLiab = document.createTextNode("Total Long-Term Liabilities: "); 
-
-    node.appendChild(notesPay);
-    node.appendChild(iNotesPay);
-    node.appendChild(lineBreak.cloneNode(true));
-    node.appendChild(bondsPay);
-    node.appendChild(iBondsPay);
-    node.appendChild(lineBreak.cloneNode(true));
-    node.appendChild(totLongTermLiab);
-    document.getElementById("liabilitiesLongTerm").appendChild(node);
-
-    document.getElementById("buttonLTLF").style.display = "none";
-}
-
-function addShowIntFieldsEvent() {
-    buttonInt.addEventListener('click', showIntFields);
-}
-
-function showIntFields() {
-    const lineBreak = document.createElement("br");
-    var node = document.createElement("P");
-    
-    var tradeNames = document.createTextNode("Trade Names:  ");
-    var iTradeNames = document.createElement("input");
-    iTradeNames.setAttribute("type", "number");
-
-    var goodwill = document.createTextNode("Goodwill:  ");
-    var iGoodwill = document.createElement("input");
-    iGoodwill.setAttribute("type", "number");
-
-    var totIntangibles = document.createTextNode("Total Intangibles: "); 
-
-    node.appendChild(tradeNames);
-    node.appendChild(iTradeNames);
-    node.appendChild(lineBreak.cloneNode(true));
-    node.appendChild(goodwill);
-    node.appendChild(iGoodwill);
-    node.appendChild(lineBreak.cloneNode(true));
-    node.appendChild(totIntangibles);
-    document.getElementById("intangibles").appendChild(node);
-
-    document.getElementById("buttonInt").style.display = "none";
-}
-
-// code for calcuating total position (only TCA is considered now)
-function addCalcTotalEvent() {
-    buttonCalcTot.addEventListener('click', calculatePosition(TCA));
-        function calculatePosition(TCA) {           
-            let textTCA = TCA.toString();
-            var node = document.createTextNode(TCA);
-            document.getElementById("showTCA").appendChild(node);
-        }
-}
