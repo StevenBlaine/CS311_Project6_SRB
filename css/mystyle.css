@@ -1,0 +1,22 @@
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    padding: 50px;
+}
+
+#container {
+    display: flex;
+    flex-direction: row;
+    gap: 50px;
+}
+
+#pic {
+    padding-top: 150px;
+    align-content: center;
+}
+
+#answers {
+    border: thin solid red;
+    align-content: center;
+    padding-left: 400px;
+    padding-right: 300px;
+}

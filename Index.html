@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+    <html>
+        <head>
+            <meta charset="utf-8" />
+            <meta name="viewport" content="width=device-width, initial-scale=1"/>
+            <link rel="stylesheet" type="text/css" href="css/mystyle.css"/>
+            <title>Mad Libs(R) via Steve</title>
+        </head>
+
+    <body>
+        <div id="container">
+            <div id="pic">
+                <img src="img/funny.png" alt="Laughing Person" height="250px" width="400px"px/>    
+            </div>
+            <div>
+                <strong>Mad Libs® Brought to you by Steve</strong>
+                <br>
+                <br>
+                <div id="answers">       
+                    <p>
+                    Enter a plural noun:<br> <input type="text" id="pluralNoun1"><br>
+                    Enter an adjective:<br> <input type="text" id="adjective1"><br>
+                    Enter an adjective:<br> <input type="text" id="adjective2"><br>
+                    Enter a plural noun:<br> <input type="text" id="pluralNoun2"><br>
+                    Enter an adjective:<br> <input type="text" id="adjective3"><br>
+                    Enter a body part:<br> <input type="text" id="bodyPart"><br>
+                    Enter an adverb:<br> <input type="text" id="adverb"><br>
+                    Enter a verb ending in -ing:<br> <input type="text" id="gerund"><br>
+                    Enter an adjective:<br> <input type="text" id="adjective4"><br>
+                    Enter an adjective:<br> <input type="text" id="adjective5"><br>
+                    <br>
+                    </p>
+                </div>
+
+                <button id="showLibButton" onclick="addShowLibEvent()"> <strong>Show Mad Lib</strong> </button>
+                <button id="resetButton" onclick="addResetLibEvent()"> <strong>Reset</strong> </button>
+                <br>
+                <br>       
+                
+                Mad Libs® is a registered trademark of Penguin Group (USA) Inc.<br>
+                This excerpt taken from "Mad Libs® on the Road: World's Greatest Word Game," available at amazon.com/Mad-Libs-Road-Roger-Price/dp/0843174986<br>
+            </div>
+        </div>
+
+        <script src="js/myscript.js"></script>
+    </body>
+</html>
