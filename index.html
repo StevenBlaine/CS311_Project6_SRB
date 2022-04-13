@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="css/mystyle.css" type="text/css"/>
+        <title>Balance Sheet Calculator</title>
+    </head>
+
+    <body>
+        <div class="header">
+            <strong>Bellarmine Financials - Balance Sheet Calculator</strong><br>
+        </div>
+
+        <div class="headingAcctng">
+            <div><strong>Assets</strong></div>
+            <div><strong>Liabilities</strong></div>
+        </div>
+
+        <div class="footer">
+        <p>© 2022 Steven Blaine</p>
+        </div> 
+    
+        <div class="container">
+            <div id="assetsCurrent">
+                <p>
+                    <strong>Current Assets</strong><br>
+                    <button type="button" id="buttonCAF" onclick="addShowCAFieldsEvent()"><strong>Add Current Assets</strong></button>          
+                </p>
+                <div id="showTCA"></div>
+            </div>
+
+            <div id="liabilitiesCurrent">
+                <p>
+                    <strong>Current Liabilities</strong><br>
+                    <button type="button" id="buttonCLF" onclick="addShowCLFieldsEvent()"> <strong>Add Current Liabilities</strong></button>
+                </p>
+            </div>
+
+            <div id="investments">
+                <p>
+                    <strong>Investment Property & Equipment</strong><br>
+                    <button type="button" id="buttonIPEF" onclick="addShowIPEFieldsEvent()"><strong>Add Investment Property & Equipment</strong></button>
+                    
+                </p>
+                
+            </div>
+
+            <div id="liabilitiesLongTerm">
+                <p>
+                    <strong>Long-Term Liabilities</strong><br>
+                    <button type="button" id="buttonLTLF" onclick="addShowLTLFieldsEvent()"><strong>Add Long-Term Liabilities</strong></button>
+                </p>
+                
+            </div>
+
+            <div id="intangibles">
+                <p>
+                    <strong>Intangibles</strong><br>
+                    <button type="button" id="buttonInt" onclick="addShowIntFieldsEvent()"><strong>Add Intangibles</strong></button>
+                </p>
+                
+            </div>
+
+            <div id="totals">
+                <p style="font-size: 22px">
+                    <strong>Total Position</strong>
+                </p>
+                <p>
+                    <button type="button" id="buttonCalcTot" onclick="addCalcTotalEvent()"><strong>Calculate Position</strong></button>
+                </p>
+                
+                <p>
+                    <strong>Total Assets:</strong><br>
+                    
+                </p>
+                
+                <p>
+                    <strong>Total Liabilities:</strong><br>
+                    
+                </p>
+                
+                <p>
+                    <strong>Position:</strong><br>
+                    
+                </p>
+            </div>
+
+        </div>
+
+        <script src="js/myscript.js"></script>
+    </body>
+</html>
